@@ -1,0 +1,42 @@
+pipeline {
+		agent {
+			node{
+				label 'maven-server'
+			}
+		}
+		tools {
+			maven "mvn"
+		}
+		stages {
+				stage('Git Clone') {
+				steps {
+					// Get code from a GitHub repository
+					git branch: 'main', credentialsId: 'ckgithub', url: 'https://github.com/csiripurapu/mvnproject'
+					}
+				}
+				stage('Maven Build') {
+				steps {
+					script {
+					// Build Maven Code
+					sh "mvn clean install"
+						}
+					}
+				}
+				stage('Sonar Scan') {
+					steps {
+						script {
+						withSonarQubeEnv(credentialsId: 'sonar-id') {
+						sh 'mvn sonar:sonar -Dsonar.projectName=Test -Dsonar.projectKey=Test'
+								}
+							}
+						}
+					}
+				stage('Quality Gate Check') {
+					steps {
+						timeout(time: 1, unit: 'HOURS') {
+							waitForQualityGate abortPipeline: false, credentialsId: 'sonar-id'
+							}
+						}
+					}   
+			}
+	}
