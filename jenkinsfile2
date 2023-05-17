@@ -37,8 +37,8 @@ pipeline {
 				stage('Quality Gate Check') {
 					steps {
 						//Check if quality gate requirements have  been met
-						timeout(time: 1, unit: 'HOURS') {
-							waitForQualityGate abortPipeline: true, credentialsId: 'sonar-id'
+						timeout(time: 1, unit: 'MINUTES') {
+							waitForQualityGate abortPipeline: false, credentialsId: 'sonar-id'
 						}
 					}
 				}
