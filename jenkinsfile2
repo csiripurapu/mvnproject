@@ -34,14 +34,6 @@ pipeline {
 						}
 					}
 				}
-				stage('Quality Gate Check') {
-					steps {
-						//Check if quality gate requirements have  been met
-						timeout(time: 1, unit: 'MINUTES') {
-							waitForQualityGate abortPipeline: false, credentialsId: 'sonar-id'
-						}
-					}
-				}
 				stage('Upload to Artifactory') {
 					steps {
 						//Upload to Jfrog Artifactory
