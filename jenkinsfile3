@@ -22,7 +22,6 @@ pipeline {
             }
                 steps {
                     script {
-                    sh "$params.Option"
                     // Build Maven Code
                     sh "mvn clean install"
                     }
