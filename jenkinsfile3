@@ -21,8 +21,8 @@ pipeline {
                 expression { params.Option == "Yes" }
             }
                 steps {
-                    sh "$params.Option"
                     script {
+                    sh "$params.Option"
                     // Build Maven Code
                     sh "mvn clean install"
                     }
