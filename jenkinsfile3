@@ -16,11 +16,12 @@ pipeline {
                     git branch: 'main', credentialsId: 'ckgithub', url: '${Repo}'
                 }
             }
-            stage('Run Build?') {
+            stage('Build') {
                     when {
                 expression { params.Option == "Yes" }
             }
                 steps {
+                    sh "$params.Option"
                     script {
                     // Build Maven Code
                     sh "mvn clean install"
