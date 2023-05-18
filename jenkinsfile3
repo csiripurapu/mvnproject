@@ -13,11 +13,13 @@ pipeline {
             stage('Git Clone') {
                 steps {
                     // Get code from a GitHub repository
-                    //credentialsID ckgithub
-                    git branch: 'main', credentialsId: '${GitHubCreds}', url: '${Repo}'
+                    git branch: 'main', credentialsId: 'ckgithub', url: '${Repo}'
                 }
             }
-            stage('Maven Build') {
+            stage('Run Build?') {
+                    when {
+                        expression ( params.Option == "Yes")
+                    }
                 steps {
                     script {
                     // Build Maven Code
