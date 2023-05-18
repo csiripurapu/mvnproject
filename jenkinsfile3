@@ -17,6 +17,9 @@ pipeline {
                 }
             }
             stage('Build') {
+                    when {
+                expression { params.Option == "Yes" }
+            }
                 steps {
                     script {
                     // Build Maven Code
