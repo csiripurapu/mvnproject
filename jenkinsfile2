@@ -34,22 +34,21 @@ pipeline {
                     }
                 }
             }
-            stage('Upload to Artifactory') {
-                steps {
-                    //Upload to Jfrog Artifactory
+            stage("Uploading to JFrog Artifactory"){
+                steps{
                     rtUpload(
                         serverId: "jfrog",
                         spec: '''{
                             "files":[{
-                                "pattern": "core/target/*.jar",
-                                "target": "be-branch"
+                                "pattern": "module-a/target/*.jar",
+                                "target": "be-artifact"
                             }]
                         }
                         ''',
-                    )
-                    }
-                }
-                
+    
+                        )
+                        }
+                }                
             stage('Archive Artivact') {
                 steps {
                     //Archive Artifact
