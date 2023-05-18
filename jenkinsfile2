@@ -41,7 +41,7 @@ pipeline {
                         spec: '''{
                             "files":[{
                                 "pattern": "module-a/target/*.jar",
-                                "target": "be-artifact"
+                                "target": "be-branch"
                             }]
                         }
                         ''',
