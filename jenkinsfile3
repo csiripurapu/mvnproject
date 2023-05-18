@@ -18,8 +18,8 @@ pipeline {
             }
             stage('Run Build?') {
                     when {
-                        expression ( params.Option == "Yes")
-                    }
+                expression { params.Option == "Yes" }
+            }
                 steps {
                     script {
                     // Build Maven Code
