@@ -1,0 +1,35 @@
+pipeline {
+    agent {
+        node{
+            label 'maven-server'
+            //Remote build server node
+        }
+    }
+    tools {
+        maven "mvn"
+        //Local environment variable for maven dependency and its location
+    }
+    stages {
+            stage('Git Clone') {
+                steps {
+                    // Get code from a GitHub repository
+                    //credentialsID ckgithub
+                    git branch: 'main', credentialsId: '${GitHubCreds}', url: '${Repo}'
+                }
+            }
+            stage('Maven Build') {
+                steps {
+                    script {
+                    // Build Maven Code
+                    sh "mvn clean install"
+                    }
+                }
+            }                
+            stage('Archive Artivact') {
+                steps {
+                    //Archive Artifact
+                    archiveArtifacts artifacts: 'module-a/target/*.jar', followSymlinks: false
+                }
+            }					   
+        }
+}
