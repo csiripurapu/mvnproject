@@ -9,7 +9,7 @@ pipeline {
           }
         }
 
-        stage('') {
+        stage('Environment Test') {
           steps {
             sh '''#!/bin/bash
 
